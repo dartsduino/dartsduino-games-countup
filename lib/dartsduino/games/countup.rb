@@ -3,7 +3,8 @@ require "dartsduino/games/countup/version"
 module Dartsduino
   module Games
     module Countup
-      # Your code goes here...
+      class Engine < ::Rails::Engine
+      end
     end
   end
 end
