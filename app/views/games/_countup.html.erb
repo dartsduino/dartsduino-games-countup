@@ -1,0 +1,34 @@
+<%= provide(:title, "Count Up") %>
+
+<%= javascript_include_tag 'games/countup' %>
+
+<div class="container">
+  <div class="col-lg-8">
+    <div class="game-title">
+      Count Up
+    </div>
+    <svg id="darts-ui" width="640" height="640"></svg>
+  </div>
+
+  <div class="col-lg-4">
+    <button class="btn btn-primary pull-right btn-start" onclick="Games_countup()">Start!</button>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr class="scores scores-title">
+          <td>Player 1</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% 8.times.each do |score| %>
+          <tr class="scores scores-score">
+            <td>0</td>
+          </tr>
+        <% end %>
+        <tr class="scores scores-total-score">
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
