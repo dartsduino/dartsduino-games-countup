@@ -7,13 +7,8 @@ var Games_countup = function () {
 
   var dartsUi = window.dartsUi;
 
-  var scoreIndex = 1;
   var scoreElements = $('.scores td');
-  var totalScore = 0;
   var totalScoreElements = $('.scores-total-score td');
-
-  var score = 0;
-  var count = 0;
 
   var State = {
     NOT_STARTED: 0,
@@ -22,11 +17,16 @@ var Games_countup = function () {
   };
   var state = State.PLAYING;
 
+  var round = 1;
+  var score = 0;
+  var count = 0;
+  var totalScore = 0;
+
   for (var i = 1; i < scoreElements.length; i++) {
     $(scoreElements[i]).removeClass(focusClass).text(0);
   }
 
-  $(scoreElements[scoreIndex]).addClass(focusClass);
+  $(scoreElements[round]).addClass(focusClass);
 
   dartsUi.onHit(function (cellId, point, ratio) {
     if (state !== State.PLAYING) {
@@ -34,7 +34,7 @@ var Games_countup = function () {
     }
 
     score += point * ratio;
-    $(scoreElements[scoreIndex]).text(score);
+    $(scoreElements[round]).text(score);
 
     totalScore += point * ratio;
     $(totalScoreElements).text(totalScore);
@@ -44,11 +44,11 @@ var Games_countup = function () {
       score = 0;
       count = 0;
 
-      $(scoreElements[scoreIndex]).removeClass(focusClass);
-      scoreIndex++;
-      $(scoreElements[scoreIndex]).addClass(focusClass);
+      $(scoreElements[round]).removeClass(focusClass);
+      round++;
+      $(scoreElements[round]).addClass(focusClass);
 
-      if (scoreIndex > 8) {
+      if (round > 8) {
         console.log('Clear!');
 
         state = State.ENDED;
