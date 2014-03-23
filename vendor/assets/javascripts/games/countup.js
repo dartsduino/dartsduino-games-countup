@@ -7,7 +7,7 @@ var Games_countup = function () {
 
   var dartsUi = window.dartsUi;
 
-  var scoreElements = $('.scores td');
+  var scoreElements = $('.scores-score td');
   var totalScoreElements = $('.scores-total-score td');
 
   var State = {
@@ -17,7 +17,7 @@ var Games_countup = function () {
   };
   var state = State.PLAYING;
 
-  var round = 1;
+  var round = 0;
   var score = 0;
   var count = 0;
   var totalScore = 0;
@@ -48,7 +48,7 @@ var Games_countup = function () {
       round++;
       $(scoreElements[round]).addClass(focusClass);
 
-      if (round > 8) {
+      if (round >= 8) {
         console.log('Clear!');
 
         state = State.ENDED;
