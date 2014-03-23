@@ -15,6 +15,13 @@ var Games_countup = function () {
   var score = 0;
   var count = 0;
 
+  var State = {
+    NOT_STARTED: 0,
+    PLAYING: 1,
+    ENDED: 2
+  };
+  var state = State.PLAYING;
+
   for (var i = 1; i < scoreElements.length; i++) {
     $(scoreElements[i]).removeClass(focusClass).text(0);
   }
@@ -22,6 +29,10 @@ var Games_countup = function () {
   $(scoreElements[scoreIndex]).addClass(focusClass);
 
   dartsUi.onHit(function (cellId, point, ratio) {
+    if (state !== State.PLAYING) {
+      return;
+    }
+
     score += point * ratio;
     $(scoreElements[scoreIndex]).text(score);
 
@@ -39,6 +50,8 @@ var Games_countup = function () {
 
       if (scoreIndex > 8) {
         console.log('Clear!');
+
+        state = State.ENDED;
       }
     }
   });
